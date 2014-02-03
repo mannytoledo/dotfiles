@@ -4,8 +4,6 @@ filetype off
 
 "Some stuff to get Vundle to work
 set nocompatible  " be iMproved
-filetype plugin indent on
-syntax enable
 
 set rtp +=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -56,6 +54,7 @@ Bundle "Pychimp/vim-luna"
 Bundle "baskerville/bubblegum"
 
 filetype plugin indent on
+syntax enable
 
 " Various sets to make stuff better
 set autoindent
