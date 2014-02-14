@@ -162,6 +162,7 @@ namespace :install do
       brew_cask_install 'macvim'
     end
 
+    #[todo] - Do I want to install vim to ~/bin in the future
     bin_dir = File.expand_path('~/bin')
     bin_vim = File.join(bin_dir, 'vim')
     unless ENV['PATH'].split(':').include?(bin_dir)
@@ -187,7 +188,7 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
   task :vundle do
     step 'vundle'
     install_github_bundle 'gmarik','vundle'
-    sh '~/bin/vim -c "BundleInstall" -c "q" -c "q"'
+    sh '/usr/bin/vim -c "BundleInstall" -c "q" -c "q"'
   end
 end
 
@@ -199,16 +200,33 @@ def filemap(map)
 end
 
 COPIED_FILES = filemap(
-  'vimrc.local'         => '~/.vimrc.local',
-  'vimrc.bundles.local' => '~/.vimrc.bundles.local'
+  'vim/vimrc.local'         => '~/.vimrc.local',
+  'vim/vimrc.bundles.local' => '~/.vimrc.bundles.local'
 )
 
 LINKED_FILES = filemap(
-  'vim'           => '~/.vim',
-  'tmux.conf'     => '~/.tmux.conf',
-  'vimrc'         => '~/.vimrc',
-  'vimrc.bundles' => '~/.vimrc.bundles'
+  'vim/vim.symlink'           => '~/.vim',
+  'tmux/tmux.conf.symlink'    => '~/.tmux.conf',
+  'vim/vimrc.symlink'         => '~/.vimrc',
+  'vim/vimrc.bundles.symlink' => '~/.vimrc.bundles',
+  'ruby/gemrc.symlink'        => '~/.gemrc'
 )
+
+namespace :link do
+
+desc 'Create symlinks to config files'
+  task :all do
+    step 'symlink'
+
+    LINKED_FILES.each do |orig, link|
+      link_file orig, link
+    end
+
+    COPIED_FILES.each do |orig, copy|
+      cp orig, copy, :verbose => true unless File.exist?(copy)
+    end
+  end
+end
 
 desc 'Install these config files.'
 task :default do
@@ -227,15 +245,7 @@ task :default do
   # TODO install gem ctags?
   # TODO run gem ctags?
 
-  step 'symlink'
-
-  LINKED_FILES.each do |orig, link|
-    link_file orig, link
-  end
-
-  COPIED_FILES.each do |orig, copy|
-    cp orig, copy, :verbose => true unless File.exist?(copy)
-  end
+  Rake::Task['link:all'].invoke
 
   # Install Vundle and bundles
   Rake::Task['install:vundle'].invoke
