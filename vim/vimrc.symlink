@@ -135,6 +135,8 @@ nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
 nmap <leader>c <Plug>Kwbd
 nmap <Leader>= :%!python -mjson.tool<Enter>
+nmap <Leader>w :Unite watson/dirty<CR>
+nmap <Leader>e :Unite watson/current_file<CR>
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " plugin settings
