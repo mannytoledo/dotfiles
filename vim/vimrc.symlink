@@ -29,6 +29,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-pastie'
 Bundle 'tpope/vim-rake'
 Bundle 'altercation/vim-colors-solarized'
+Bundle "jonathanfilip/vim-lucius"
 Bundle 'tpope/vim-surround'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
@@ -41,6 +42,8 @@ Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'tpope/vim-vividchalk'
+Bundle "w0ng/vim-hybrid"
+"https://github.com/w0ng/vim-hybrid
 Bundle 'git@github.com:SirVer/ultisnips.git'
 Bundle 'Shougo/unite.vim'
 Bundle 'alpaca-tc/vim-unite-watson.vim'
@@ -119,25 +122,25 @@ if exists('$TMUX') "Support resizing in TMUX
 endif
 
 let mapleader = ','
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <leader>l :Align
-nmap <leader>a :Ack
-nmap <leader>b :CtrlPBuffer<CR>
-nmap <leader>d :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>t :CtrlP<CR>
-nmap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
-nmap <leader>] :TagbarToggle<CR>
-nmap <leader><space> :call whitespace#strip_trailing()<CR>
-nmap <leader>g :GitGutterToggle<CR>
-nmap <leader>c <Plug>Kwbd
-nmap <Leader>= :%!jq -M '.'<CR>
-nmap <Leader>s :Unite watson/dirty<CR>
-nmap <Leader>e :Unite watson/current_file<CR>
-map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <leader>l :Align
+nnoremap <leader>a :Ack
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+nnoremap <leader>t :CtrlP<CR>
+nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+nnoremap <leader>] :TagbarToggle<CR>
+nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
+nnoremap <leader>g :GitGutterToggle<CR>
+nnoremap <leader>c <Plug>Kwbd
+nnoremap <Leader>= :%!jq -M '.'<CR>
+nnoremap <Leader>s :Unite watson/dirty<CR>
+nnoremap <Leader>e :Unite watson/current_file<CR>
+noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " plugin settings
 let g:ctrlp_match_window = 'order:ttb,max:20'
