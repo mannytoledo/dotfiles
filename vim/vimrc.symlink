@@ -38,6 +38,7 @@ Bundle 'rosstimson/bats.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-repeat'
 Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'christoomey/vim-tmux-navigator'
@@ -47,6 +48,7 @@ Bundle 'w0ng/vim-hybrid'
 Bundle 'git@github.com:SirVer/ultisnips.git'
 Bundle 'Shougo/unite.vim'
 Bundle 'alpaca-tc/vim-unite-watson.vim'
+Bundle 'ngmy/vim-rubocop'
 
 " Languages
 Bundle 'kchmck/vim-coffee-script'
@@ -146,6 +148,8 @@ noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '
 let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
