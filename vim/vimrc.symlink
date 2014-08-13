@@ -5,61 +5,64 @@ filetype off
 "Some stuff to get Vundle to work
 set nocompatible  " be iMproved
 
-set rtp +=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#begin()
 " Let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " My Bundles
-Bundle 'bling/vim-airline'
-"Bundle 'Lokaltog/vim-easymotion'
-Bundle 'mileszs/ack.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'skwp/greplace.vim'
-Bundle 't9md/vim-chef'
-Bundle 'austintaylor/vim-indentobject'
-Bundle 'vim-scripts/kwbdi.vim'
-Bundle 'tmhedberg/matchit'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-pastie'
-Bundle 'tpope/vim-rake'
-Bundle 'altercation/vim-colors-solarized'
-Bundle "jonathanfilip/vim-lucius"
-Bundle 'tpope/vim-surround'
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'rosstimson/bats.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'leafgarland/typescript-vim'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-repeat'
-Bundle 'jtratner/vim-flavored-markdown'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'w0ng/vim-hybrid'
-"https://github.com/w0ng/vim-hybrid
-Bundle 'git@github.com:SirVer/ultisnips.git'
-Bundle 'Shougo/unite.vim'
-Bundle 'alpaca-tc/vim-unite-watson.vim'
-Bundle 'ngmy/vim-rubocop'
+Plugin 'bling/vim-airline'
+"Plugin 'Lokaltog/vim-easymotion'
+Plugin 'mileszs/ack.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'skwp/greplace.vim'
+Plugin 't9md/vim-chef'
+Plugin 'austintaylor/vim-indentobject'
+Plugin 'vim-scripts/kwbdi.vim'
+Plugin 'tmhedberg/matchit'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-pastie'
+Plugin 'tpope/vim-rake'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'tpope/vim-surround'
+Plugin 'rizzatti/funcoo.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'rosstimson/bats.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-repeat'
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-vividchalk'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'elzr/vim-json'
+Plugin 'git@github.com:SirVer/ultisnips.git'
+Plugin 'Shougo/unite.vim'
+Plugin 'alpaca-tc/vim-unite-watson.vim'
+Plugin 'ngmy/vim-rubocop'
+Plugin 'mattn/flappyvird-vim'
+Plugin 'Valloric/YouCompleteMe'
 
 " Languages
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'tpope/vim-rails.git'
-Bundle 'slim-template/vim-slim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-rails.git'
+Plugin 'slim-template/vim-slim'
 
 " Colors
-Bundle "nanotech/jellybeans.vim"
-Bundle "Pychimp/vim-luna"
-Bundle "baskerville/bubblegum"
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'Pychimp/vim-luna'
+Plugin 'baskerville/bubblegum'
 
+call vundle#end()
 filetype plugin indent on
 syntax enable
 
@@ -140,8 +143,6 @@ nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>c <Plug>Kwbd
 nnoremap <Leader>= :%!jq -M '.'<CR>
-nnoremap <Leader>s :Unite watson/dirty<CR>
-nnoremap <Leader>e :Unite watson/current_file<CR>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " plugin settings
