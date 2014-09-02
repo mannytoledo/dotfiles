@@ -1,0 +1,31 @@
+[user]
+  email = mtoledo@adobe.com
+  name = Manny Toledo
+[core]
+  excludesfile = /Users/mtoledo/.gitignore_global
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
+[mergetool "sourcetree"]
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+[mergetool "sublime"]
+  cmd = subl -w $MERGED
+  trustExitCode = false
+[merge]
+  tool = mvimdiff
+[push]
+  default = simple
+[alias]
+  newfork = "!sh -c 'git fetch upstream && git checkout -b feature-$1 upstream/master' -"
+  hotfixfork = "!sh -c 'git fetch upstream && git checkout -b hotfix-$1 upstream/master' -"
+  new = "!sh -c 'git fetch && git checkout -b feature-$1 master' -"
+  hotfix = "!sh -c 'git fetch && git checkout -b hotfix-$1 master' -"
+  pr = !git push origin HEAD && hub pull-request
+  release-notesfork = !git fetch upstream && git log `git describe --abbrev=0 --tags`..upstream/master  --merges --pretty=%s%n%b%n
+  release-notes = !git fetch origin && git log `git describe --abbrev=0 --tags`..master  --merges --pretty=%s%n%b%n
+  changelog = !git log --oneline --decorate
+  bcl = !git log `git show -s :/^Merge --pretty=%h`...HEAD --pretty=format:'%C(red)%h%Creset %C(yellow)(%cr)%Creset %s %b %Cblue<%an>%Creset' --abbrev-commit
+  #lp = "!sh 'git branch -r | awk '{print $1}\' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk \'{print $1}\' | xargs git branch -d' -"
+[gitchangelog]
+	rc-path = /Users/mtoledo/.gitchangelog.rc
