@@ -23,13 +23,13 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'skwp/greplace.vim'
 Plugin 't9md/vim-chef'
 Plugin 'austintaylor/vim-indentobject'
+Plugin 'fatih/vim-go'
 Plugin 'vim-scripts/kwbdi.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-pastie'
 Plugin 'tpope/vim-rake'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'jonathanfilip/vim-lucius'
 Plugin 'tpope/vim-surround'
 Plugin 'rizzatti/funcoo.vim'
 Plugin 'rizzatti/dash.vim'
@@ -47,9 +47,8 @@ Plugin 'w0ng/vim-hybrid'
 Plugin 'elzr/vim-json'
 Plugin 'git@github.com:SirVer/ultisnips.git'
 Plugin 'Shougo/unite.vim'
-Plugin 'alpaca-tc/vim-unite-watson.vim'
+"Plugin 'alpaca-tc/vim-unite-watson.vim'
 Plugin 'ngmy/vim-rubocop'
-Plugin 'mattn/flappyvird-vim'
 Plugin 'Valloric/YouCompleteMe'
 
 " Languages
@@ -84,7 +83,7 @@ set incsearch
 set laststatus=2
 set list
 set listchars=tab:▸\ ,trail:▫
-"set hidden
+set hidden
 set number
 set ruler
 set scrolloff=3
@@ -151,6 +150,7 @@ let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
+let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
