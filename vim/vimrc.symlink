@@ -61,6 +61,7 @@ Plugin 'slim-template/vim-slim'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'Pychimp/vim-luna'
 Plugin 'baskerville/bubblegum'
+Plugin 'whatyouhide/vim-gotham'
 
 call vundle#end()
 filetype plugin indent on
@@ -153,6 +154,8 @@ let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
 let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 
+autocmd BufWritePost *.py call Flake8()
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   let g:ackprg = 'ag --nogroup --column'
@@ -198,20 +201,6 @@ endif
 
 " keyboard shortcuts
 inoremap jj <ESC>
-
-let g:hybrid_use_iTerm_colors = 1
-let g:hybrid_use_Xresources = 1
-" gui settings
-if (&t_Co == 256 || has('gui_running'))
-  if ($TERM_PROGRAM == 'iTerm.app')
-    set background=dark
-    colorscheme hybrid
-    "colorscheme solarized
-    "colorscheme lucius
-  else
-    colorscheme desert
-  endif
-endif
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
