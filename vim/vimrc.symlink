@@ -2,68 +2,64 @@
 filetype on " without this vim emits a zero exit status, later, because of :ft off
 filetype off
 
-"Some stuff to get Vundle to work
+
 set nocompatible  " be iMproved
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
-" Let Vundle manage Vundle
-" required!
-Plugin 'gmarik/vundle'
+call plug#begin()
 
 " My Bundles
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 "Plugin 'Lokaltog/vim-easymotion'
-Plugin 'mileszs/ack.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'skwp/greplace.vim'
-Plugin 't9md/vim-chef'
-Plugin 'austintaylor/vim-indentobject'
-Plugin 'fatih/vim-go'
-Plugin 'vim-scripts/kwbdi.vim'
-Plugin 'tmhedberg/matchit'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-pastie'
-Plugin 'tpope/vim-rake'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-surround'
-Plugin 'rizzatti/funcoo.vim'
-Plugin 'rizzatti/dash.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'scrooloose/syntastic'
-Plugin 'rosstimson/bats.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-repeat'
-Plugin 'jtratner/vim-flavored-markdown'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-vividchalk'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'elzr/vim-json'
-Plugin 'git@github.com:SirVer/ultisnips.git'
-Plugin 'Shougo/unite.vim'
-"Plugin 'alpaca-tc/vim-unite-watson.vim'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'Valloric/YouCompleteMe'
+Plug 'mileszs/ack.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'skwp/greplace.vim'
+Plug 't9md/vim-chef'
+Plug 'austintaylor/vim-indentobject'
+Plug 'fatih/vim-go'
+Plug 'vim-scripts/kwbdi.vim'
+Plug 'tmhedberg/matchit'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tpope/vim-pastie'
+Plug 'tpope/vim-rake'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-surround'
+Plug 'rizzatti/funcoo.vim'
+Plug 'rizzatti/dash.vim'
+Plug 'nvie/vim-flake8'
+Plug 'scrooloose/syntastic'
+Plug 'rosstimson/bats.vim'
+Plug 'majutsushi/tagbar'
+Plug 'leafgarland/typescript-vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'jtratner/vim-flavored-markdown'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-vividchalk'
+Plug 'w0ng/vim-hybrid'
+Plug 'elzr/vim-json'
+Plug 'git@github.com:SirVer/ultisnips.git'
+Plug 'Shougo/unite.vim'
+"Plug 'alpaca-tc/vim-unite-watson.vim'
+Plug 'ngmy/vim-rubocop'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 
 " Languages
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-rails.git'
-Plugin 'slim-template/vim-slim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'tpope/vim-rails'
+Plug 'slim-template/vim-slim'
 
 " Colors
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'Pychimp/vim-luna'
-Plugin 'baskerville/bubblegum'
-Plugin 'whatyouhide/vim-gotham'
+Plug 'nanotech/jellybeans.vim'
+Plug 'Pychimp/vim-luna'
+Plug 'baskerville/bubblegum'
+Plug 'whatyouhide/vim-gotham'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 syntax enable
 
@@ -122,6 +118,7 @@ set complete=.,w,b,u,t
 set completeopt+=longest,menuone,preview
 
 " mouse=a will prevent you from copying using the mouse in iterm
+" You can still copy if you hold option while selecting
 set mouse=a
 if exists('$TMUX') "Support resizing in TMUX
   set ttymouse=xterm2
@@ -153,8 +150,9 @@ let g:gitgutter_enabled = 0
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
 let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
+let g:ycm_use_ultisnips_completer = 1
 
-autocmd BufWritePost *.py call Flake8()
+" autocmd BufWritePost *.py call Flake8()
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -169,8 +167,7 @@ endif
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-" md is markdown
-" autocmd BufRead,BufNewFile *.md set filetype=markdown
+
 " vim-flavored-markdown config
 augroup markdown
   au!
