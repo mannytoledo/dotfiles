@@ -28,4 +28,8 @@
   bcl = !git log `git show -s :/^Merge --pretty=%h`...HEAD --pretty=format:'%C(red)%h%Creset %C(yellow)(%cr)%Creset %s %b %Cblue<%an>%Creset' --abbrev-commit
   #lp = "!sh 'git branch -r | awk '{print $1}\' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk \'{print $1}\' | xargs git branch -d' -"
 [gitchangelog]
-	rc-path = /Users/mtoledo/.gitchangelog.rc
+  rc-path = /Users/mtoledo/.gitchangelog.rc
+[filter "media"]
+  clean = git media clean %f
+  smudge = git media smudge %f
+  required = true
