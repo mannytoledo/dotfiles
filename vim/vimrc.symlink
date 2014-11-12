@@ -43,6 +43,9 @@ Plug 'tpope/vim-vividchalk'
 Plug 'elzr/vim-json'
 Plug 'git@github.com:SirVer/ultisnips.git'
 Plug 'Shougo/unite.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'amix/vim-zenroom2'
+Plug 'junegunn/limelight.vim'
 "Plug 'alpaca-tc/vim-unite-watson.vim'
 Plug 'ngmy/vim-rubocop'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
@@ -143,6 +146,7 @@ nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>c <Plug>Kwbd
 nnoremap <Leader>= :%!jq -M '.'<CR>
+nnoremap <silent> <leader>z :Goyo<cr>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " plugin settings
@@ -155,6 +159,10 @@ let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 let g:ycm_use_ultisnips_completer = 1
 
 " autocmd BufWritePost *.py call Flake8()
+
+" Limelight and Goyo inteagration
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
