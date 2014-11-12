@@ -40,7 +40,6 @@ Plug 'jtratner/vim-flavored-markdown'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-vividchalk'
-Plug 'w0ng/vim-hybrid'
 Plug 'elzr/vim-json'
 Plug 'git@github.com:SirVer/ultisnips.git'
 Plug 'Shougo/unite.vim'
@@ -58,6 +57,9 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'Pychimp/vim-luna'
 Plug 'baskerville/bubblegum'
 Plug 'whatyouhide/vim-gotham'
+Plug 'w0ng/vim-hybrid'
+Plug 'sjl/badwolf'
+Plug 'freeo/vim-kalisi'
 
 call plug#end()
 filetype plugin indent on

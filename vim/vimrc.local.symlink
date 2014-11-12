@@ -8,7 +8,9 @@ let g:hybrid_use_iTerm_colors = 1
 if (&t_Co == 256 || has('gui_running'))
   if ($TERM_PROGRAM == 'iTerm.app')
     " set background=dark
-    colorscheme hybrid
+    " colorscheme hybrid
+    colorscheme badwolf
+    set guifont=Inconsolata:h14
     " colorscheme gotham
     " colorscheme solarized
     " colorscheme lucius
