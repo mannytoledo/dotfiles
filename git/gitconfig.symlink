@@ -23,11 +23,13 @@
   update = "!sh -c 'git fetch && git checkout -b update-$1 master' -"
   new = "!sh -c 'git fetch && git checkout -b feature-$1 master' -"
   fix = "!sh -c 'git fetch && git checkout -b fix-$1 master' -"
+  clb = !git remote prune origin && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d
   pr = !git push origin HEAD && hub pull-request
   release-notesfork = !git fetch upstream && git log `git describe --abbrev=0 --tags`..upstream/master  --merges --pretty=%s%n%b%n
   release-notes = !git fetch origin && git log `git describe --abbrev=0 --tags`..master  --merges --pretty=%s%n%b%n
   changelog = !git log --oneline --decorate
   bcl = !git log `git show -s :/^Merge --pretty=%h`...HEAD --pretty=format:'%C(red)%h%Creset %C(yellow)(%cr)%Creset %s %b %Cblue<%an>%Creset' --abbrev-commit
+  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
   #lp = "!sh 'git branch -r | awk '{print $1}\' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk \'{print $1}\' | xargs git branch -d' -"
 [gitchangelog]
   rc-path = /Users/mtoledo/.gitchangelog.rc
