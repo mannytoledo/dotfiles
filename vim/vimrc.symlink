@@ -1,6 +1,6 @@
 " Enable Syntax highlighting
-filetype on " without this vim emits a zero exit status, later, because of :ft off
-filetype off
+" filetype on " without this vim emits a zero exit status, later, because of :ft off
+" filetype off
 
 
 set nocompatible  " be iMproved
@@ -18,6 +18,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'skwp/greplace.vim'
 Plug 't9md/vim-chef'
+Plug 'myusuf3/numbers.vim'
 Plug 'austintaylor/vim-indentobject'
 Plug 'fatih/vim-go'
 Plug 'vim-scripts/kwbdi.vim'
@@ -42,13 +43,15 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-vividchalk'
 Plug 'elzr/vim-json'
 Plug 'git@github.com:SirVer/ultisnips.git'
+Plug 'honza/vim-snippets'
 Plug 'Shougo/unite.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'mtth/scratch.vim'
 Plug 'amix/vim-zenroom2'
 Plug 'junegunn/limelight.vim'
 "Plug 'alpaca-tc/vim-unite-watson.vim'
 Plug 'ngmy/vim-rubocop'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer' }
 " Plug 'vim-scripts/DrawIt'
 
 " Languages
@@ -66,8 +69,8 @@ Plug 'sjl/badwolf'
 " Plug 'freeo/vim-kalisi'
 
 call plug#end()
-filetype plugin indent on
-syntax enable
+" filetype plugin indent on
+" syntax enable
 
 " Various sets to make stuff better
 set autoindent
@@ -146,7 +149,6 @@ nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>c <Plug>Kwbd
-nnoremap <Leader>= :%!jq -M '.'<CR>
 nnoremap <silent> <leader>z :Goyo<cr>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
@@ -158,7 +160,14 @@ let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
 let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 let g:ycm_use_ultisnips_completer = 1
-
+let g:UltiSnipsUsePythonVersion = 2
+" let g:UltiSnipsExpandTrigger = '<C-x>'
+" let g:UltiSnipsJumpForwardTrigger = '<C-x>'
+" let g:UltiSnipsJumpBackwardTrigger = '<C-s>'
+" let g:UltiSnipsEditSplit = 'vertical'
+let g:UltiSnipsExpandTrigger="<c-x>"
+let g:UltiSnipsJumpForwardTrigger="<c-x>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " autocmd BufWritePost *.py call Flake8()
 
 " Limelight and Goyo inteagration
