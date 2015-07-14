@@ -10,10 +10,10 @@ if (&t_Co == 256 || has('gui_running'))
     " set background=dark
     " colorscheme hybrid
     " colorscheme vividchalk
-    colorscheme badwolf
+    " colorscheme badwolf
     " set guifont=Inconsolata:h15
     " colorscheme gotham
-    " colorscheme solarized
+    colorscheme solarized
     " colorscheme lucius
   else
     colorscheme desert

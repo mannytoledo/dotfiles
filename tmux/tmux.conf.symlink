@@ -15,8 +15,9 @@ bind-key R source-file ~/.tmux.conf \; display-message "tmux.conf reloaded."
 # vi is good
 setw -g mode-keys vi
 
-# Quick escapee key response, to not break vim flow
+# Quick escape key response, to not break vim flow
 set -s escape-time 20
+
 # mouse behavior
 setw -g mode-mouse on
 set -g mouse-select-pane on
@@ -42,11 +43,16 @@ bind-key k select-pane -U
 bind-key l select-pane -R
 
 # smart pane switching with awareness of vim splits
-bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-h) || tmux select-pane -L"
-bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-j) || tmux select-pane -D"
-bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-k) || tmux select-pane -U"
-bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-l) || tmux select-pane -R"
-bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+# bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)n?vim$' && tmux send-keys C-h) || tmux select-pane -L"
+bind -n C-h run "tmux select-pane -L"
+# bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)n?vim$' && tmux send-keys C-j) || tmux select-pane -D"
+bind -n C-j run "tmux select-pane -D"
+# bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)n?vim$' && tmux send-keys C-k) || tmux select-pane -U"
+bind -n C-k run "tmux select-pane -U"
+# bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)n?vim$' && tmux send-keys C-l) || tmux select-pane -R"
+bind -n C-l run "tmux select-pane -R"
+# bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)n?vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+bind -n C-\ run "tmux select-pane -l"
 
 bind-key C-o rotate-window
 
@@ -75,23 +81,16 @@ bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
 set-window-option -g display-panes-time 1500
 
-# Status Bar
-set-option -g status-interval 1
-set-option -g status-left ''
-set-option -g status-right '%l:%M%p'
-set-window-option -g window-status-current-fg magenta
-set-option -g status-fg default
-
 # Status Bar solarized-dark (default)
-set-option -g status-bg black
-set-option -g pane-active-border-fg magenta
-set-option -g pane-active-border-bg default
-set-option -g pane-border-fg magenta
+# set-option -g status-bg black
+# set-option -g pane-active-border-fg magenta
+# set-option -g pane-active-border-bg default
+# set-option -g pane-border-fg magenta
 
 # Status Bar solarized-light
-if-shell "[ \"$COLORFGBG\" = \"11;15\" ]" "set-option -g status-bg white"
-if-shell "[ \"$COLORFGBG\" = \"11;15\" ]" "set-option -g pane-active-border-fg white"
-if-shell "[ \"$COLORFGBG\" = \"11;15\" ]" "set-option -g pane-border-fg white"
+# if-shell "[ \"$COLORFGBG\" = \"11;15\" ]" "set-option -g status-bg white"
+# if-shell "[ \"$COLORFGBG\" = \"11;15\" ]" "set-option -g pane-active-border-fg white"
+# if-shell "[ \"$COLORFGBG\" = \"11;15\" ]" "set-option -g pane-border-fg white"
 
 # Set window notifications
 setw -g monitor-activity on
@@ -108,3 +107,5 @@ set-option -g repeat-time 0
 
 # Increase the terminal buffer
 set-option -g history-limit 7000
+
+source ~/.tm-theme/tm-theme.conf
