@@ -23,7 +23,8 @@
   update = "!sh -c 'git fetch && git checkout -b update/$1 master' -"
   new = "!sh -c 'git fetch && git checkout -b feature/$1 master' -"
   fix = "!sh -c 'git fetch && git checkout -b fix/$1 master' -"
-  clb = !git remote prune origin && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d
+  clbo = !git remote prune origin && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d
+  clbu = !git remote prune upstream && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d
   pr = !git push origin HEAD && hub pull-request
   release-notesfork = !git fetch upstream && git log `git describe --abbrev=0 --tags`..upstream/master  --merges --pretty=%s%n%b%n
   release-notes = !git fetch origin && git log `git describe --abbrev=0 --tags`..master  --merges --pretty=%s%n%b%n

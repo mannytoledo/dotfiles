@@ -2,7 +2,6 @@
 " filetype on " without this vim emits a zero exit status, later, because of :ft off
 " filetype off
 
-
 set nocompatible  " be iMproved
 
 call plug#begin()
@@ -11,12 +10,9 @@ call plug#begin()
 Plug 'bling/vim-airline'
 "Plugin 'Lokaltog/vim-easymotion'
 Plug 'mileszs/ack.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+" Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 " Plug 'skwp/greplace.vim'
 " Plug 't9md/vim-chef'
 Plug 'myusuf3/numbers.vim'
@@ -28,32 +24,50 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Plug 'tpope/vim-pastie'
 " Plug 'tpope/vim-rake'
 " Plug 'altercation/vim-colors-solarized'
-Plug 'tpope/vim-surround'
 " Plug 'rizzatti/funcoo.vim'
 " Plug 'rizzatti/dash.vim'
 Plug 'nvie/vim-flake8'
-Plug 'scrooloose/syntastic'
 " Plug 'rosstimson/bats.vim'
-" Plug 'majutsushi/tagbar'
 " Plug 'leafgarland/typescript-vim'
-Plug 'tpope/vim-unimpaired'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
-" Plug 'jtratner/vim-flavored-markdown'
+Plug 'jtratner/vim-flavored-markdown'
 " Plug 'nathanaelkane/vim-indent-guides'
-" Plug 'christoomey/vim-tmux-navigator'
 " Plug 'tpope/vim-vividchalk'
-Plug 'elzr/vim-json'
-Plug 'git@github.com:SirVer/ultisnips.git'
-Plug 'honza/vim-snippets'
 " Plug 'Shougo/unite.vim'
-Plug 'junegunn/goyo.vim'
 " Plug 'mtth/scratch.vim'
 " Plug 'amix/vim-zenroom2'
+" Plug 'alpaca-tc/vim-unite-watson.vim'
+Plug 'fmoralesc/vim-pad'
+
+" Better syntax highlighting
+Plug 'scrooloose/syntastic'
+
+" Way better json highlighting end editing
+Plug 'elzr/vim-json'
+
+" Snippets manager and tons of default snippets to start
+Plug 'git@github.com:SirVer/ultisnips.git'
+Plug 'honza/vim-snippets'
+
+" Writeroom style distraction free writing
+Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-"Plug 'alpaca-tc/vim-unite-watson.vim'
+
+" Rubocop Syntax Highlighting in vim
 Plug 'ngmy/vim-rubocop'
+
+" Autocomplete
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer' }
 " Plug 'vim-scripts/DrawIt'
+
+" Easy pane switching in tmux
+Plug 'christoomey/vim-tmux-navigator'
 
 " Languages
 " Plug 'kchmck/vim-coffee-script'
@@ -66,8 +80,9 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer' }
 " Plug 'baskerville/bubblegum'
 " Plug 'whatyouhide/vim-gotham'
 " Plug 'w0ng/vim-hybrid'
+Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plug 'flazz/vim-colorschemes'
-Plug 'sjl/badwolf'
+" Plug 'sjl/badwolf'
 " Plug 'freeo/vim-kalisi'
 
 call plug#end()
@@ -111,13 +126,11 @@ set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu
 set wildmode=longest,list,full
 
-" I don't know what these do but I should find out
 set noswapfile
-"set nobackup
+set nobackup
 set undofile
 set undodir=~/tmp/vim/undo
 
-" Same here I don't know what these do but I need to figure it out
 set showmatch
 set incsearch
 set hlsearch
@@ -136,10 +149,10 @@ if exists('$TMUX') "Support resizing in TMUX
 endif
 
 let mapleader = ','
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+" noremap <C-h> <C-w>h
+" noremap <C-j> <C-w>j
+" noremap <C-k> <C-w>k
+" noremap <C-l> <C-w>l
 noremap <leader>l :Align
 nnoremap <leader>a :Ack
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -152,7 +165,7 @@ nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>c <Plug>Kwbd
 nnoremap <silent> <leader>z :Goyo<cr>
-noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <silent> <leader>V :source ~/.nvimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " plugin settings
 let g:ctrlp_match_window = 'order:ttb,max:20'
@@ -172,6 +185,10 @@ let g:UltiSnipsJumpForwardTrigger="<C-x>"
 let g:UltiSnipsJumpBackwardTrigger="<C-c>"
 " autocmd BufWritePost *.py call Flake8()
 
+let g:pad#dir="/Users/mtoledo/Dropbox/Notes/vim-pad"
+let g:pad#window_height=20
+let g:pad#search_backend="ag"
+
 " Limelight and Goyo inteagration
 autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!
@@ -190,10 +207,13 @@ endif
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 
+" cloudformation template as json
+autocmd BufRead,BufNewFile *.template set filetype=json
+
 " vim-flavored-markdown config
 augroup markdown
   au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown spell textwidth=85 wrapmargin=2
 augroup END
 
 " extra rails.vim help
@@ -221,9 +241,8 @@ endif
 " keyboard shortcuts
 inoremap jj <ESC>
 
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
+set nocursorline " don't highlight current line
 
-" Continue on line 85 in the rest of Dunn's config https://github.com/Attamusc/dotfiles/blob/master/vim/vimrc.symlink#L87
-
+" if filereadable(expand("~/.vimrc.local"))
+"   source ~/.vimrc.local
+" endif
