@@ -11,13 +11,14 @@ Plug 'bling/vim-airline'
 "Plugin 'Lokaltog/vim-easymotion'
 Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 " Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 " Plug 'skwp/greplace.vim'
 " Plug 't9md/vim-chef'
 Plug 'myusuf3/numbers.vim'
 " Plug 'austintaylor/vim-indentobject'
 Plug 'fatih/vim-go'
+Plug 'ervandew/supertab'
 " Plug 'vim-scripts/kwbdi.vim'
 " Plug 'tmhedberg/matchit'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -99,7 +100,7 @@ set clipboard=unnamed
 set cmdheight=2
 set cursorline
 set directory-=.
-set encoding=utf-8
+" set encoding=utf-8
 set expandtab
 set formatoptions=qrn1
 set ignorecase
@@ -137,9 +138,9 @@ set hlsearch
 set foldlevelstart=0
 
 " Better Completion
-set omnifunc=syntaxcomplete#Complete
-set complete=.,w,b,u,t
-set completeopt+=longest,menuone,preview
+" set omnifunc=syntaxcomplete#Complete
+" set complete=.,w,b,u,t
+" set completeopt+=longest,menuone,preview
 
 " mouse=a will prevent you from copying using the mouse in iterm
 " You can still copy if you hold option while selecting
@@ -176,14 +177,25 @@ let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
 let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 let g:ycm_use_ultisnips_completer = 1
 let g:UltiSnipsUsePythonVersion = 2
+
+" Set ultisnips triggers
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+
 " let g:UltiSnipsExpandTrigger = '<C-x>'
 " let g:UltiSnipsJumpForwardTrigger = '<C-x>'
 " let g:UltiSnipsJumpBackwardTrigger = '<C-s>'
 " let g:UltiSnipsEditSplit = 'vertical'
-let g:UltiSnipsExpandTrigger="<C-CR>"
-let g:UltiSnipsJumpForwardTrigger="<C-x>"
-let g:UltiSnipsJumpBackwardTrigger="<C-c>"
+" let g:UltiSnipsExpandTrigger="<C-CR>"
+" let g:UltiSnipsJumpForwardTrigger="<C-x>"
+" let g:UltiSnipsJumpBackwardTrigger="<C-c>"
 " autocmd BufWritePost *.py call Flake8()
+"
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 let g:pad#dir="/Users/mtoledo/Dropbox/Notes/vim-pad"
 let g:pad#window_height=20
@@ -243,6 +255,6 @@ inoremap jj <ESC>
 
 set nocursorline " don't highlight current line
 
-" if filereadable(expand("~/.vimrc.local"))
-"   source ~/.vimrc.local
-" endif
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif

@@ -2,7 +2,7 @@
   email = mtoledo@adobe.com
   name = Manny Toledo
 [core]
-  excludesfile = /Users/mtoledo/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
   path =
