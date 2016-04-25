@@ -26,7 +26,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Plug 'tpope/vim-rake'
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'rizzatti/funcoo.vim'
-" Plug 'rizzatti/dash.vim'
+Plug 'rizzatti/dash.vim'
 Plug 'nvie/vim-flake8'
 " Plug 'rosstimson/bats.vim'
 " Plug 'leafgarland/typescript-vim'
@@ -38,6 +38,7 @@ Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'jtratner/vim-flavored-markdown'
+Plug 'pearofducks/ansible-vim'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'tpope/vim-vividchalk'
 " Plug 'Shougo/unite.vim'
@@ -177,6 +178,7 @@ let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
 let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 let g:ycm_use_ultisnips_completer = 1
 let g:UltiSnipsUsePythonVersion = 2
+let g:python_host_prog = '/usr/local/bin/python'
 
 " Set ultisnips triggers
 let g:UltiSnipsExpandTrigger="<tab>"
