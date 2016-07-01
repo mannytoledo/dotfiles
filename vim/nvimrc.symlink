@@ -39,6 +39,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'jtratner/vim-flavored-markdown'
 Plug 'pearofducks/ansible-vim'
+Plug 'JamshedVesuna/vim-markdown-preview'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'tpope/vim-vividchalk'
 " Plug 'Shougo/unite.vim'
@@ -179,6 +180,11 @@ let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 let g:ycm_use_ultisnips_completer = 1
 let g:UltiSnipsUsePythonVersion = 2
 let g:python_host_prog = '/usr/local/bin/python'
+
+let g:vim_markdown_preview_hotkey='<C-m>'
+let g:vim_markdown_preview_toggle=0
+let g:vim_markdown_preview_github=1
+" let g:vim_markdown_preview_browser='Google Chrome'
 
 " Set ultisnips triggers
 let g:UltiSnipsExpandTrigger="<tab>"
