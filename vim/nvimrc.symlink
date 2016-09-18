@@ -8,55 +8,65 @@ call plug#begin()
 
 " My Bundles
 Plug 'bling/vim-airline'
-"Plugin 'Lokaltog/vim-easymotion'
 Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'airblade/vim-gitgutter'
-" Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-" Plug 'skwp/greplace.vim'
-" Plug 't9md/vim-chef'
 Plug 'myusuf3/numbers.vim'
-" Plug 'austintaylor/vim-indentobject'
 Plug 'fatih/vim-go'
-Plug 'ervandew/supertab'
-" Plug 'vim-scripts/kwbdi.vim'
-" Plug 'tmhedberg/matchit'
+" Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-" Plug 'tpope/vim-pastie'
-" Plug 'tpope/vim-rake'
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'rizzatti/funcoo.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'nvie/vim-flake8'
-" Plug 'rosstimson/bats.vim'
-" Plug 'leafgarland/typescript-vim'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'jtratner/vim-flavored-markdown'
 Plug 'pearofducks/ansible-vim'
 Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'fmoralesc/vim-pad'
+Plug 'mhinz/vim-startify'
+Plug 'neomake/neomake'
+
+" ===========================================
+" Bundles I've experiemented with in the past
+" ===========================================
+
+" Plugin 'Lokaltog/vim-easymotion'
+" Plug 'airblade/vim-gitgutter'
+" Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+" Plug 'skwp/greplace.vim'
+" Plug 't9md/vim-chef'
+" Plug 'austintaylor/vim-indentobject'
+" Plug 'vim-scripts/kwbdi.vim'
+" Plug 'tmhedberg/matchit'
+" Plug 'tpope/vim-pastie'
+" Plug 'tpope/vim-rake'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'rizzatti/funcoo.vim'
+" Plug 'rosstimson/bats.vim'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'tpope/vim-unimpaired'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'tpope/vim-vividchalk'
 " Plug 'Shougo/unite.vim'
 " Plug 'mtth/scratch.vim'
 " Plug 'amix/vim-zenroom2'
 " Plug 'alpaca-tc/vim-unite-watson.vim'
-Plug 'fmoralesc/vim-pad'
 
 " Better syntax highlighting
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
+Plug 'smerrill/vcl-vim-plugin'
 
 " Way better json highlighting end editing
 Plug 'elzr/vim-json'
 
 " Snippets manager and tons of default snippets to start
-Plug 'git@github.com:SirVer/ultisnips.git'
-Plug 'honza/vim-snippets'
+" Plug 'git@github.com:SirVer/ultisnips.git'
+" Plug 'honza/vim-snippets'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 
 " Writeroom style distraction free writing
 Plug 'junegunn/goyo.vim'
@@ -66,7 +76,8 @@ Plug 'junegunn/limelight.vim'
 Plug 'ngmy/vim-rubocop'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer' }
 " Plug 'vim-scripts/DrawIt'
 
 " Easy pane switching in tmux
@@ -83,10 +94,12 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'baskerville/bubblegum'
 " Plug 'whatyouhide/vim-gotham'
 " Plug 'w0ng/vim-hybrid'
-Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plug 'flazz/vim-colorschemes'
+" Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+" Plug 'flazz/vim-colorschemes'
 " Plug 'sjl/badwolf'
 " Plug 'freeo/vim-kalisi'
+Plug 'morhetz/gruvbox' " https://github.com/morhetz/gruvbox
+
 
 call plug#end()
 " filetype plugin indent on
@@ -123,6 +136,7 @@ set splitright
 set switchbuf=useopen
 set synmaxcol=400
 set tabstop=4
+set termguicolors
 set t_Co=256
 set visualbell
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
@@ -139,7 +153,7 @@ set incsearch
 set hlsearch
 set foldlevelstart=0
 
-" Better Completion
+" Completion Improvments that I don't use currently
 " set omnifunc=syntaxcomplete#Complete
 " set complete=.,w,b,u,t
 " set completeopt+=longest,menuone,preview
@@ -147,8 +161,15 @@ set foldlevelstart=0
 " mouse=a will prevent you from copying using the mouse in iterm
 " You can still copy if you hold option while selecting
 set mouse=a
-if exists('$TMUX') "Support resizing in TMUX
-  " set ttymouse=xterm2
+
+" Leaving this here for now but it didn't do any thing in nvim
+" if exists('$TMUX') "Support resizing in TMUX
+"   " set ttymouse=xterm2
+" endif
+
+if &term =~ '^screen'
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
 endif
 
 let mapleader = ','
@@ -174,12 +195,13 @@ noremap <silent> <leader>V :source ~/.nvimrc<CR>:filetype detect<CR>:exe ":echo 
 let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+" let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
-let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
-let g:ycm_use_ultisnips_completer = 1
+" let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
+" let g:ycm_use_ultisnips_completer = 1
 let g:UltiSnipsUsePythonVersion = 2
 let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 let g:vim_markdown_preview_hotkey='<C-m>'
 let g:vim_markdown_preview_toggle=0
@@ -199,11 +221,29 @@ let g:UltiSnipsEditSplit="vertical"
 " let g:UltiSnipsExpandTrigger="<C-CR>"
 " let g:UltiSnipsJumpForwardTrigger="<C-x>"
 " let g:UltiSnipsJumpBackwardTrigger="<C-c>"
+
+let g:airline#extensions#tabline#enabled = 1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+
+" Plugin: deocomplete.nvim
+smap <silent><expr><tab> neosnippet#jumpable() ? "\<plug>(neosnippet_jump)"      : "\<tab>"
+imap <silent><expr><tab> pumvisible()          ? "\<c-n>"                        : (neosnippet#jumpable()   ? "\<plug>(neosnippet_jump)"   : "\<tab>")
+imap <silent><expr><cr>  !pumvisible()         ? "\<cr>\<plug>AutoPairsReturn"   : (neosnippet#expandable() ? "\<plug>(neosnippet_expand)" : deoplete#mappings#close_popup())
+imap <silent><expr><esc> pumvisible()          ? deoplete#mappings#close_popup() : "\<esc>"
+imap <silent><expr><bs>  deoplete#mappings#smart_close_popup()."\<bs>"
+
+" Flake8 configs
 " autocmd BufWritePost *.py call Flake8()
-"
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+
+autocmd! BufWritePost * Neomake
+
+let g:flake8_show_in_gutter=1  " show
+let g:flake8_show_quickfix=0  " don't show
+
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
 
 let g:pad#dir="/Users/mtoledo/Dropbox/Notes/vim-pad"
 let g:pad#window_height=20
@@ -236,16 +276,17 @@ augroup markdown
   au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown spell textwidth=85 wrapmargin=2
 augroup END
 
+" I don't touch rails anymore so these are disable for now.
 " extra rails.vim help
-autocmd User Rails silent! Rnavcommand decorator      app/decorators            -glob=**/* -suffix=_decorator.rb
-autocmd User Rails silent! Rnavcommand observer       app/observers             -glob=**/* -suffix=_observer.rb
-autocmd User Rails silent! Rnavcommand feature        features                  -glob=**/* -suffix=.feature
-autocmd User Rails silent! Rnavcommand job            app/jobs                  -glob=**/* -suffix=_job.rb
-autocmd User Rails silent! Rnavcommand mediator       app/mediators             -glob=**/* -suffix=_mediator.rb
-autocmd User Rails silent! Rnavcommand stepdefinition features/step_definitions -glob=**/* -suffix=_steps.rb
+" autocmd User Rails silent! Rnavcommand decorator      app/decorators            -glob=**/* -suffix=_decorator.rb
+" autocmd User Rails silent! Rnavcommand observer       app/observers             -glob=**/* -suffix=_observer.rb
+" autocmd User Rails silent! Rnavcommand feature        features                  -glob=**/* -suffix=.feature
+" autocmd User Rails silent! Rnavcommand job            app/jobs                  -glob=**/* -suffix=_job.rb
+" autocmd User Rails silent! Rnavcommand mediator       app/mediators             -glob=**/* -suffix=_mediator.rb
+" autocmd User Rails silent! Rnavcommand stepdefinition features/step_definitions -glob=**/* -suffix=_steps.rb
+
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
-
 
 " Fix Cursor in TMUX
 if exists('$TMUX')
@@ -262,6 +303,9 @@ endif
 inoremap jj <ESC>
 
 set nocursorline " don't highlight current line
+
+colorscheme gruvbox
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
