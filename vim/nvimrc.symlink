@@ -77,6 +77,7 @@ Plug 'ngmy/vim-rubocop'
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer' }
 " Plug 'vim-scripts/DrawIt'
 
@@ -227,11 +228,29 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 
 " Plugin: deocomplete.nvim
-smap <silent><expr><tab> neosnippet#jumpable() ? "\<plug>(neosnippet_jump)"      : "\<tab>"
-imap <silent><expr><tab> pumvisible()          ? "\<c-n>"                        : (neosnippet#jumpable()   ? "\<plug>(neosnippet_jump)"   : "\<tab>")
-imap <silent><expr><cr>  !pumvisible()         ? "\<cr>\<plug>AutoPairsReturn"   : (neosnippet#expandable() ? "\<plug>(neosnippet_expand)" : deoplete#mappings#close_popup())
-imap <silent><expr><esc> pumvisible()          ? deoplete#mappings#close_popup() : "\<esc>"
-imap <silent><expr><bs>  deoplete#mappings#smart_close_popup()."\<bs>"
+" smap <silent><expr><tab> neosnippet#jumpable() ? "<plug>(neosnippet_jump)"      : "<tab>"
+" imap <silent><expr><tab> pumvisible()          ? "<c-n>"                        : (neosnippet#jumpable()   ? "<plug>(neosnippet_jump)"   : "<tab>")
+" imap <silent><expr><cr>  !pumvisible()         ? <cr>                           : (neosnippet#expandable() ? "<plug>(neosnippet_expand)" : deoplete#mappings#close_popup())
+" imap <silent><expr><esc> pumvisible()          ? deoplete#mappings#close_popup() : "<esc>"
+" imap <silent><expr><bs>  deoplete#mappings#smart_close_popup()."<bs>"
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+"
+" SuperTab like snippets' behavior.
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 " Flake8 configs
 " autocmd BufWritePost *.py call Flake8()
