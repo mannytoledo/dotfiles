@@ -197,6 +197,7 @@ augroup configgroup
   autocmd BufRead,BufNewFile *.fdoc set filetype=yaml " fdoc is yaml
   autocmd BufRead,BufNewFile *.template set filetype=json " cloudformation template as json
   autocmd VimResized * :wincmd = " automatically rebalance windows on vim resize
+  autocmd BufRead,BufNewFile */behanceops/ansible/*.yaml,*/behanceops/ansible/*.yml set syntax=ansible
 augroup END
 " }}}
 " Spaces & Tabs {{{
