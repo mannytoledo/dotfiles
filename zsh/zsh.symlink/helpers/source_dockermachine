@@ -1,0 +1,6 @@
+# source docker-machine environment variables
+if docker-machine ls |grep -q 'dev.*vmwarefusion.*Running'; then
+  eval $(docker-machine env dev)
+else
+  echo "Docker-machine: Machine ""dev"" is stopped."
+fi
