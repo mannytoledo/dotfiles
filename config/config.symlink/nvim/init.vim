@@ -68,6 +68,7 @@ set background=dark
 " }}}
 " {{{ Misc
 set clipboard=unnamed
+set inccommand=split "Shows the effects of a command incrementally, as you type.
 " }}}
 " UI Layout {{{
 set cursorline
@@ -197,6 +198,7 @@ augroup configgroup
   autocmd BufRead,BufNewFile *.fdoc set filetype=yaml " fdoc is yaml
   autocmd BufRead,BufNewFile *.template set filetype=json " cloudformation template as json
   autocmd VimResized * :wincmd = " automatically rebalance windows on vim resize
+  autocmd BufRead,BufNewFile */behanceops/ansible/*.yaml,*/behanceops/ansible/*.yml set syntax=ansible
 augroup END
 " }}}
 " Spaces & Tabs {{{

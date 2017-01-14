@@ -1,0 +1,6 @@
+[submodule "zsh/zsh.symlink/oh-my-zsh"]
+	path = zsh/zsh.symlink/vendor/oh-my-zsh
+	url = git@github.com:robbyrussell/oh-my-zsh.git
+[submodule "zsh/zsh.symlink/vendor/pure"]
+	path = zsh/zsh.symlink/vendor/pure
+	url = git@github.com:sindresorhus/pure.git
