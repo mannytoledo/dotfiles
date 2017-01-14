@@ -1,15 +1,14 @@
 #!/bin/bash
 #
 # bootstrap installs things.
-
+set -euo pipefail
+IFS=$'\n\t'
 DOTFILES_ROOT="`pwd`"
-
-set -e
 
 echo ''
 
 info () {
-  printf "  [ \033[00;34m..\033[0m ] $1"
+  printf "  [ \033[00;34m..\033[0m ] $1\n"
 }
 
 user () {
@@ -80,15 +79,26 @@ install_dotfiles () {
 
       if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
       then
-        mv $dest $dest\.backup
-        success "moved $dest to $dest.backup"
+        if [ -h $dest ]
+        then
+          skip="true"
+        else
+          date=$(date '+%Y%m%d%H%M')
+          mv $dest $dest\.backup-$date
+          success "moved $dest to $dest.backup-$date"
+        fi
       fi
 
       if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
       then
         link_files $source $dest
       else
-        success "skipped $source"
+        if [ -h $dest ]
+        then
+          success "$dest is a symlink, skipping."
+        else
+          success "skipped $source"
+        fi
       fi
 
     else
