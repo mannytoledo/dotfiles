@@ -1,0 +1,22 @@
+---
+language: generic
+services:
+  - docker
+
+matrix:
+  include:
+
+    - os: linux
+      dist: trusty
+
+    - os: osx
+      osx_image: xcode8.1
+
+notifications:
+  email:
+    on_failure: always
+    on_success: always
+
+script:
+  - make install
+  - make test
