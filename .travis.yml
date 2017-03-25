@@ -7,9 +7,6 @@ git:
 services:
   - docker
 
-before_install:
-  - curl -L https://github.com/aelsabbahy/goss/releases/download/_VERSION_/goss-linux-amd64 -o /usr/local/bin/goss && chmod +rx /usr/local/bin/goss
-
 matrix:
   include:
 
@@ -19,6 +16,7 @@ matrix:
           # Use sed to replace the SSH URL with the public URL, then initialize submodules
           - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
           - git submodule update --init --recursive
+          - curl -L https://github.com/aelsabbahy/goss/releases/download/v0.3.1/goss-linux-amd64 -o /usr/local/bin/goss && chmod +rx /usr/local/bin/goss
 
     - os: osx
       osx_image: xcode8.1
