@@ -4,6 +4,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 DOTFILES_ROOT="`pwd`"
+FIRST_ARG=${1:-}
 
 echo ''
 
@@ -48,8 +49,15 @@ install_dotfiles () {
       backup=false
       skip=false
 
+      if [ "$FIRST_ARG" == "force" ]
+      then
+        skip_all=true
+      fi
+
       if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
       then
+
+
         user "File already exists: `basename $source`, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
         read -n 1 action
 
