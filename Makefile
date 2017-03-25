@@ -46,6 +46,7 @@ help:
 	@printf "Primary Commands :\n"
 	@printf "$$GREEN make install$$NC             Symlink dotfiles\n"
 	@printf "$$GREEN make test$$NC                Run test scripts\n"
+	@printf "$$GREEN just test$$NC                Test line\n"
 	@printf "\n"
 	@printf "\033[21m\n\n"
 
