@@ -45,6 +45,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
 Plug 'zchee/deoplete-jedi'
 Plug 'christoomey/vim-tmux-navigator' " Easy pane switching in tmux
 Plug 'morhetz/gruvbox' " Great colorscheme https://github.com/morhetz/gruvbox
+Plug 'Shougo/unite.vim' "Unite and create user interfaces
 " tpope f'yea
 Plug 'tpope/vim-commentary' " Quick commenting in most languages
 Plug 'tpope/vim-endwise' " Smarter closing of functions, if statements in ruby, vimscript and a few othersj
@@ -214,5 +215,7 @@ set foldmethod=indent   " fold based on indent level
 set foldnestmax=10      " max 10 depth
 set foldenable          " don't fold files by default on open
 set foldlevelstart=10   " Start with fold level of 10
+" }}}
+" Deoplete {{{
 " }}}
 " vim:foldmethod=marker:foldlevel=0
