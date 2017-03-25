@@ -51,7 +51,7 @@ install_dotfiles () {
 
       if [ "$FIRST_ARG" == "force" ]
       then
-        overwrite_all=true
+        skip_all=true
       fi
 
       if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
@@ -122,11 +122,12 @@ install_dotfiles
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
-  if . script/app_install > /tmp/dotfiles-dot 2>&1
+  if [ -f script/app_install ]
   then
+    ./script/app_install
     success "dependencies installed"
   else
-    fail "error installing dependencies"
+    fail "No app_install file defined"
   fi
 fi
 
