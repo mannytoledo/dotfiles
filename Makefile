@@ -18,7 +18,6 @@ m::::m   m::::m   m::::m      tt::::::::::::::tl::::::l d:::::::::::::::::do::::
 m::::m   m::::m   m::::m        tt:::::::::::ttl::::::l  d:::::::::ddd::::d oo:::::::::::oo 
 mmmmmm   mmmmmm   mmmmmm          ttttttttttt  llllllll   ddddddddd   ddddd   ooooooooooo 
 =============================================================================================
-
 endef
 
 export ASCILOGO
