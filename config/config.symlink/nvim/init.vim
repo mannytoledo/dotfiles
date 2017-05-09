@@ -31,7 +31,7 @@ Plug 'majutsushi/tagbar' " Exhuberant C tags in a sidebar
 Plug 'jtratner/vim-flavored-markdown' " Support for Github flavored markdown highlighting
 Plug 'pearofducks/ansible-vim' " Better highlighting of ansible yaml
 Plug 'JamshedVesuna/vim-markdown-preview' " Quick previewing of markdown files in browser
-Plug 'fmoralesc/vim-pad' " Quick place to take notes
+Plug 'fmoralesc/vim-pad', {'branch': 'devel' } " Quick place to take notes
 Plug 'mhinz/vim-startify' " Shiny start page for vim
 Plug 'neomake/neomake' " linting and asynchronus job execution
 Plug 'smerrill/vcl-vim-plugin' " vcl file highlighting
@@ -199,7 +199,7 @@ augroup configgroup
   autocmd BufRead,BufNewFile *.fdoc set filetype=yaml " fdoc is yaml
   autocmd BufRead,BufNewFile *.template set filetype=json " cloudformation template as json
   autocmd VimResized * :wincmd = " automatically rebalance windows on vim resize
-  autocmd BufRead,BufNewFile */behanceops/ansible/*.yaml,*/behanceops/ansible/*.yml set syntax=ansible
+  autocmd BufRead,BufNewFile */ansible*.yaml,*/ansible*.yml set syntax=ansible
 augroup END
 " }}}
 " Spaces & Tabs {{{
