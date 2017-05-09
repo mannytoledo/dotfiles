@@ -1,0 +1,35 @@
+---
+language: generic
+
+git:
+    submodules: false
+
+services:
+  - docker
+
+matrix:
+  include:
+
+    - os: linux
+      dist: trusty
+      before_install:
+          # Use sed to replace the SSH URL with the public URL, then initialize submodules
+          - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+          - git submodule update --init --recursive
+          - curl -L https://github.com/aelsabbahy/goss/releases/download/v0.3.1/goss-linux-amd64 -o ./goss && chmod +rx ./goss
+
+    - os: osx
+      osx_image: xcode8.1
+      before_install:
+          # Use sed to replace the SSH URL with the public URL, then initialize submodules
+          - sed -i '' 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+          - git submodule update --init --recursive
+
+notifications:
+  email:
+    on_failure: always
+    on_success: always
+
+script:
+  - make install
+  - make test

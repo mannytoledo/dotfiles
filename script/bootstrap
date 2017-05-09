@@ -122,11 +122,12 @@ install_dotfiles
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
-  if . bin/dot > /tmp/dotfiles-dot 2>&1
+  if [ -f script/app_install ]
   then
+    ./script/app_install
     success "dependencies installed"
   else
-    fail "error installing dependencies"
+    fail "No app_install file defined"
   fi
 fi
 
