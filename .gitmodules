@@ -4,3 +4,6 @@
 [submodule "zsh/zsh.symlink/vendor/pure"]
 	path = zsh/zsh.symlink/vendor/pure
 	url = git@github.com:sindresorhus/pure.git
+[submodule "zsh/zsh.symlink/vendor/prezto"]
+	path = zsh/zsh.symlink/vendor/prezto
+	url = https://github.com/sorin-ionescu/prezto.git

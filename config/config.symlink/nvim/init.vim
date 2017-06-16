@@ -30,7 +30,7 @@ Plug 'nvie/vim-flake8' " Because we should all try and folllow PEP8 sort of
 Plug 'majutsushi/tagbar' " Exhuberant C tags in a sidebar
 Plug 'jtratner/vim-flavored-markdown' " Support for Github flavored markdown highlighting
 Plug 'pearofducks/ansible-vim' " Better highlighting of ansible yaml
-Plug 'JamshedVesuna/vim-markdown-preview' " Quick previewing of markdown files in browser
+" Plug 'JamshedVesuna/vim-markdown-preview' " Quick previewing of markdown files in browser
 Plug 'fmoralesc/vim-pad', {'branch': 'devel' } " Quick place to take notes
 Plug 'mhinz/vim-startify' " Shiny start page for vim
 Plug 'neomake/neomake' " linting and asynchronus job execution
