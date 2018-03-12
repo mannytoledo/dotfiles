@@ -1,3 +1,10 @@
+" Set Variables {{{
+" Detect terminal
+let s:tmux = exists('$TMUX')
+let s:iterm = exists('$ITERM_PROFILE') || exists('$ITERM_SESSION_ID')
+let s:iterm2 = s:iterm && exists('$TERM_PROGRAM_VERSION') &&
+ \ match($TERM_PROGRAM_VERSION, '\v^[2-9]\.') == 0
+" }}}
 " Vim Specific {{{
 if !has('nvim')
   " ===== Neovim provides defaults for these =====
@@ -28,14 +35,16 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " Tree file explorer in a
 Plug 'rizzatti/dash.vim' " Integration for https://kapeli.com/dash
 Plug 'nvie/vim-flake8' " Because we should all try and folllow PEP8 sort of
 Plug 'majutsushi/tagbar' " Exhuberant C tags in a sidebar
-Plug 'jtratner/vim-flavored-markdown' " Support for Github flavored markdown highlighting
+" Plug 'jtratner/vim-flavored-markdown' " Support for Github flavored markdown highlighting
 Plug 'pearofducks/ansible-vim' " Better highlighting of ansible yaml
 " Plug 'JamshedVesuna/vim-markdown-preview' " Quick previewing of markdown files in browser
 Plug 'fmoralesc/vim-pad', {'branch': 'devel' } " Quick place to take notes
 Plug 'mhinz/vim-startify' " Shiny start page for vim
-Plug 'neomake/neomake' " linting and asynchronus job execution
+" Plug 'neomake/neomake' " linting and asynchronus job execution
+Plug 'w0rp/ale' "Asynchronous Lint Engine
 Plug 'smerrill/vcl-vim-plugin' " vcl file highlighting
 Plug 'elzr/vim-json' " Way better json highlighting end editing
+Plug 'joereynolds/gtags-scope' " An up-to-date version of gtags-cscope.vim from GNU global
 Plug 'Shougo/neosnippet' " Snippets manager
 Plug 'Shougo/neosnippet-snippets' " Additional snippets to get started
 Plug 'junegunn/goyo.vim' " Writeroom style distraction free writing
@@ -45,6 +54,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
 Plug 'zchee/deoplete-jedi'
 Plug 'christoomey/vim-tmux-navigator' " Easy pane switching in tmux
 Plug 'morhetz/gruvbox' " Great colorscheme https://github.com/morhetz/gruvbox
+Plug 'kaicataldo/material.vim' "A dark color scheme for Vim/Neovim based on the Material color scheme
 Plug 'Shougo/unite.vim' "Unite and create user interfaces
 " tpope f'yea
 Plug 'tpope/vim-commentary' " Quick commenting in most languages
@@ -52,6 +62,7 @@ Plug 'tpope/vim-endwise' " Smarter closing of functions, if statements in ruby, 
 Plug 'tpope/vim-fugitive' " vim managing git like a boss
 Plug 'tpope/vim-surround' " Shortcuts for surrounding text with quotes, brackets etc
 Plug 'tpope/vim-repeat' " Add support for repeating plugin maps
+" Plug 'yuttie/comfortable-motion.vim' " Brings physics-based smooth scrolling to the Vim world!<Paste>
 call plug#end()
 "}}}
 " Backups {{{
@@ -63,13 +74,17 @@ set backupcopy=yes
 set nobackup
 " }}}
 " Colors {{{
-set termguicolors "Use 24-bit color
-colorscheme gruvbox
+if (has("termguicolors"))
+  set termguicolors "Use 24-bit color
+endif
+colorscheme material
+let g:material_theme_style = 'dark'
 set background=dark
 " }}}
 " {{{ Misc
 set clipboard=unnamed
 set inccommand=split "Shows the effects of a command incrementally, as you type.
+set autowrite
 " }}}
 " UI Layout {{{
 set cursorline
@@ -84,6 +99,7 @@ set showmatch           " highlight matching parenthesis
 set scrolloff=3         " Lines around cursor to keep visible
 set list                " Display whitespace
 set nocursorline " don't highlight current line
+set mouse=a              " Turn on mouse support
 " set listchars=tab:▸\ ,trail:▫
 " set synmaxcol=400     " Set the max column width to continue highlighting
 set splitright          " Always split windows to the right
@@ -109,7 +125,7 @@ set hlsearch   " highlight all matches
 set smartcase  " Override 'ignorecase' when uppercase characters are used
 " }}}
 " Nvim Python {{{
-let g:python_host_prog = '/usr/local/bin/python'
+" let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 " }}}
 " NERDTree {{{
@@ -125,8 +141,15 @@ endif
 " GitGutter {{{
 let g:gitgutter_enabled = 0
 " }}}
+" Gtags {{{
+let g:GtagsCscope_Auto_Map = 1
+" }}}
 " VimRubocop {{{
 let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
+" }}}
+" vim-go {{{
+let g:go_fmt_command = "goimports"
+let g:go_snippet_engine = "neosnippet"
 " }}}
 " Deoplete {{{
 let g:airline#extensions#tabline#enabled = 1
@@ -156,8 +179,15 @@ let g:flake8_show_in_gutter=1  " show
 let g:flake8_show_quickfix=0  " don't show
 "}}}
 " Neomake {{{
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
 "}}}
+" w0rp/ale {{{
+"
+" }}}
+" yuttie/comfortable-motion {{{
+" noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+" noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
+" }}}
 " Vim-Pad {{{
 let g:pad#dir="/Users/mtoledo/Dropbox/Notes/vim-pad"
 let g:pad#window_height=20
@@ -195,7 +225,7 @@ inoremap jj <ESC>
 " {{{ AutoGroups
 augroup configgroup
   au!
-  autocmd BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown spell textwidth=85 wrapmargin=2 " vim-flavored-markdown config
+  " autocmd BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown spell textwidth=85 wrapmargin=2 " vim-flavored-markdown config
   autocmd BufRead,BufNewFile *.fdoc set filetype=yaml " fdoc is yaml
   autocmd BufRead,BufNewFile *.template set filetype=json " cloudformation template as json
   autocmd VimResized * :wincmd = " automatically rebalance windows on vim resize
