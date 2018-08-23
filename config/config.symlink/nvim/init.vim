@@ -41,7 +41,8 @@ Plug 'pearofducks/ansible-vim' " Better highlighting of ansible yaml
 Plug 'fmoralesc/vim-pad', {'branch': 'devel' } " Quick place to take notes
 Plug 'mhinz/vim-startify' " Shiny start page for vim
 " Plug 'neomake/neomake' " linting and asynchronus job execution
-Plug 'w0rp/ale' "Asynchronous Lint Engine
+" Plug 'w0rp/ale' "Asynchronous Lint Engine
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'smerrill/vcl-vim-plugin' " vcl file highlighting
 Plug 'elzr/vim-json' " Way better json highlighting end editing
 Plug 'joereynolds/gtags-scope' " An up-to-date version of gtags-cscope.vim from GNU global
@@ -62,6 +63,7 @@ Plug 'tpope/vim-endwise' " Smarter closing of functions, if statements in ruby, 
 Plug 'tpope/vim-fugitive' " vim managing git like a boss
 Plug 'tpope/vim-surround' " Shortcuts for surrounding text with quotes, brackets etc
 Plug 'tpope/vim-repeat' " Add support for repeating plugin maps
+Plug 'junegunn/vader.vim' " A simple Vimscript test framework
 " Plug 'yuttie/comfortable-motion.vim' " Brings physics-based smooth scrolling to the Vim world!<Paste>
 call plug#end()
 "}}}
@@ -104,7 +106,7 @@ set mouse=a              " Turn on mouse support
 " set synmaxcol=400     " Set the max column width to continue highlighting
 set splitright          " Always split windows to the right
 set visualbell
-set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
+set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc,*.pyc,__pycache__/**
 set wildmode=longest,list,full
 
 " Fix Cursor in TMUX
@@ -126,7 +128,7 @@ set smartcase  " Override 'ignorecase' when uppercase characters are used
 " }}}
 " Nvim Python {{{
 " let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/Users/mtoledo/.pyenv/shims/python'
 " }}}
 " NERDTree {{{
 let g:NERDSpaceDelims=1
@@ -181,6 +183,16 @@ let g:flake8_show_quickfix=0  " don't show
 " Neomake {{{
 " autocmd! BufWritePost * Neomake
 "}}}
+" LanguageClient {{{
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['pyls'],
+    \ }
+
+    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+" }}}
 " w0rp/ale {{{
 "
 " }}}
@@ -229,7 +241,8 @@ augroup configgroup
   autocmd BufRead,BufNewFile *.fdoc set filetype=yaml " fdoc is yaml
   autocmd BufRead,BufNewFile *.template set filetype=json " cloudformation template as json
   autocmd VimResized * :wincmd = " automatically rebalance windows on vim resize
-  autocmd BufRead,BufNewFile */ansible*.yaml,*/ansible*.yml set syntax=ansible
+  autocmd BufRead,BufNewFile */ansible*.yaml,*/ansible*.yml set syntax=yaml
+  autocmd FileType python nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
 augroup END
 " }}}
 " Spaces & Tabs {{{
@@ -245,7 +258,5 @@ set foldmethod=indent   " fold based on indent level
 set foldnestmax=10      " max 10 depth
 set foldenable          " don't fold files by default on open
 set foldlevelstart=10   " Start with fold level of 10
-" }}}
-" Deoplete {{{
 " }}}
 " vim:foldmethod=marker:foldlevel=0
