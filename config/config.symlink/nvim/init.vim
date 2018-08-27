@@ -80,7 +80,7 @@ if (has("termguicolors"))
   set termguicolors "Use 24-bit color
 endif
 colorscheme material
-let g:material_theme_style = 'dark'
+" let g:material_theme_style = 'dark'
 set background=dark
 " }}}
 " {{{ Misc
@@ -185,13 +185,13 @@ let g:flake8_show_quickfix=0  " don't show
 "}}}
 " LanguageClient {{{
 let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls'],
-    \ }
+let g:LanguageClient_serverCommands = {}
+let g:LanguageClient_serverCommands.python = ['pyls']
+let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
 
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " }}}
 " w0rp/ale {{{
 "
