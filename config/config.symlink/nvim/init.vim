@@ -52,11 +52,12 @@ Plug 'junegunn/goyo.vim' " Writeroom style distraction free writing
 Plug 'junegunn/limelight.vim' " Writeroom style distraction free writing
 Plug 'ngmy/vim-rubocop' " Rubocop Syntax Highlighting in vim
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
-Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-jedi'
 Plug 'christoomey/vim-tmux-navigator' " Easy pane switching in tmux
 Plug 'morhetz/gruvbox' " Great colorscheme https://github.com/morhetz/gruvbox
 Plug 'kaicataldo/material.vim' "A dark color scheme for Vim/Neovim based on the Material color scheme
 Plug 'Shougo/unite.vim' "Unite and create user interfaces
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "fzf is a general-purpose command-line fuzzy finder.
 " tpope f'yea
 Plug 'tpope/vim-commentary' " Quick commenting in most languages
 Plug 'tpope/vim-endwise' " Smarter closing of functions, if statements in ruby, vimscript and a few othersj
@@ -64,6 +65,7 @@ Plug 'tpope/vim-fugitive' " vim managing git like a boss
 Plug 'tpope/vim-surround' " Shortcuts for surrounding text with quotes, brackets etc
 Plug 'tpope/vim-repeat' " Add support for repeating plugin maps
 Plug 'junegunn/vader.vim' " A simple Vimscript test framework
+Plug 'hashivim/vim-terraform' "basic vim/terraform integration
 " Plug 'yuttie/comfortable-motion.vim' " Brings physics-based smooth scrolling to the Vim world!<Paste>
 call plug#end()
 "}}}
@@ -127,8 +129,8 @@ set hlsearch   " highlight all matches
 set smartcase  " Override 'ignorecase' when uppercase characters are used
 " }}}
 " Nvim Python {{{
-" let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/Users/mtoledo/.pyenv/shims/python'
+let g:python_host_prog = '/Users/mtoledo/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/mtoledo/.pyenv/versions/neovim3/bin/python'
 " }}}
 " NERDTree {{{
 let g:NERDSpaceDelims=1
@@ -184,10 +186,16 @@ let g:flake8_show_quickfix=0  " don't show
 " autocmd! BufWritePost * Neomake
 "}}}
 " LanguageClient {{{
+set signcolumn=yes
+set hidden
+
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {}
-let g:LanguageClient_serverCommands.python = ['pyls']
+let g:LanguageClient_serverCommands.python = ['python', '-m', 'pyls']
 let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+let g:LanguageClient_serverCommands.go = ['go-langserver']
+let g:LanguageClient_serverCommands.yaml = ['node', '/usr/local/lib/node_modules/yaml-language-server/out/server/src/server.js', '--stdio']
+" let g:LanguageClient_serverCommands.php = ['php', '', '']
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>

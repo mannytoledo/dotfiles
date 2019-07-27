@@ -22,7 +22,7 @@
   changelog = !git log --oneline --decorate
   bcl = !git log `git show -s :/^Merge --pretty=%h`...HEAD --pretty=format:'%C(red)%h%Creset %C(yellow)(%cr)%Creset %s %b %Cblue<%an>%Creset' --abbrev-commit
   wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
-  own = "!bash -c 'hub fork && git remote rename origin upstream && if [ $(git remote|grep mannytoledo) -eq 0 ]; then git remote rename mannytoledo origin; else git remote rename mtoledo origin;fi'"
+  own = !hub fork && git remote rename origin upstream &&  git remote rename mannytoledo origin
   cown = !hub fork && git remote rename origin upstream && git remote rename mtoledo origin
 #  get = "!bash -c 'url=$1; re=\'^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$\'; if [[ $url =~ $re ]]; then; protocol=${BASH_REMATCH[1]}; separator=${BASH_REMATCH[2]}; hostname=${BASH_REMATCH[3]}; user=${BASH_REMATCH[4]}; repo=${BASH_REMATCH[5]}; fi; git clone $url ${HOME}/code/$hostname/$user/$repo'"
   #lp = "!sh 'git branch -r | awk '{print $1}\' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk \'{print $1}\' | xargs git branch -d' -"
