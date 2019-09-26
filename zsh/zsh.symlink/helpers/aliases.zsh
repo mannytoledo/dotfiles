@@ -13,3 +13,4 @@ alias kittyconfig="nvim ~/.config/kitty/kitty.conf"
 alias neovimconfig="nvim ~/.config/nvim/init.vim"
 alias fixmacvideo='sudo killall VDCAssistant'
 alias gc-docker='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc -e REMOVE_VOLUMES=1 spotify/docker-gc'
+alias vpnvirginia='sudo openconnect --user=mtoledo asa-virginia-1.adobe.com'
