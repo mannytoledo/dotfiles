@@ -8,7 +8,6 @@ alias corpify="touch .envrc && echo 'export GITHUB_HOST=git.corp.adobe.com' >> .
 alias dc="docker-compose"
 alias dm="docker-machine"
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
-alias chefenv="eval $(chef shell-init zsh)"
 alias kittyconfig="nvim ~/.config/kitty/kitty.conf"
 alias neovimconfig="nvim ~/.config/nvim/init.vim"
 alias fixmacvideo='sudo killall VDCAssistant'
