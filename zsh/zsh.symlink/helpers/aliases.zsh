@@ -13,4 +13,4 @@ alias neovimconfig="nvim ~/.config/nvim/init.vim"
 alias fixmacvideo='sudo killall VDCAssistant'
 alias gc-docker='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc -e REMOVE_VOLUMES=1 spotify/docker-gc'
 alias vpnvirginia='sudo openconnect --user=mtoledo asa-virginia-1.adobe.com'
-alias adobetvdownload='youtube-dl -k --recode-video mp4 --postprocessor-args "-c:v libx264 -crf 19 -strict experimental" rtmp://cp230696.edgefcs.net/ondemand/230696/vod/wc/mp/4000/26872/94478/110178/Archive/ad/_ad72664a-d5f5-1702-0fe3-e413fd182025_/media-1549503801486_464k.flv'
+alias vault_login='vault login -method=ldap username=${USER} && export VAULT_TOKEN=$(vault token lookup | grep id | tail -n 1 | tr -s " " | cut -d " " -f2)'
