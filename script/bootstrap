@@ -3,31 +3,31 @@
 # bootstrap installs things.
 set -euo pipefail
 IFS=$'\n\t'
-DOTFILES_ROOT="`pwd`"
+DOTFILES_ROOT="$(pwd)"
 FIRST_ARG=${1:-}
 
 echo ''
 
 info () {
-  printf "  [ \033[00;34m..\033[0m ] $1\n"
+  printf "  [ \033[00;34m..\033[0m ] %s\n" "$1"
 }
 
 user () {
-  printf "\r  [ \033[0;33m?\033[0m ] $1 "
+  printf "\r  [ \033[0;33m?\033[0m ] %s " "$1"
 }
 
 success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] %s\n" "$1"
 }
 
 fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] %s\n" "$1"
   echo ''
   exit
 }
 
 link_files () {
-  ln -s $1 $2
+  ln -s "$1" "$2"
   success "linked $1 to $2"
 }
 
@@ -38,11 +38,13 @@ install_dotfiles () {
   backup_all=false
   skip_all=false
 
-  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink`
+  # shellcheck disable=SC2044
+  for source in $(find "$DOTFILES_ROOT" -maxdepth 2 -name \*.symlink)
   do
-    dest="$HOME/.`basename \"${source%.*}\"`"
+    # shellcheck disable=SC2086
+    dest="$HOME/.$(basename \"${source%.*}\")"
 
-    if [ -f $dest ] || [ -d $dest ]
+    if [ -f "$dest" ] || [ -d "$dest" ]
     then
 
       overwrite=false
@@ -58,8 +60,9 @@ install_dotfiles () {
       then
 
 
-        user "File already exists: `basename $source`, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
-        read -n 1 action
+        # shellcheck disable=SC2086
+        user "File already exists: $(basename \"$source\"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+        read -rn 1 action
 
         case "$action" in
           o )
@@ -81,27 +84,27 @@ install_dotfiles () {
 
       if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
       then
-        rm -rf $dest
+        rm -rf "$dest"
         success "removed $dest"
       fi
 
       if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
       then
-        if [ -h $dest ]
+        if [ -h "$dest" ]
         then
           skip="true"
         else
           date=$(date '+%Y%m%d%H%M')
-          mv $dest $dest\.backup-$date
+          mv "$dest" "$dest\.backup-$date"
           success "moved $dest to $dest.backup-$date"
         fi
       fi
 
       if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
       then
-        link_files $source $dest
+        link_files "$source" "$dest"
       else
-        if [ -h $dest ]
+        if [ -h "$dest" ]
         then
           success "$dest is a symlink, skipping."
         else
@@ -110,7 +113,7 @@ install_dotfiles () {
       fi
 
     else
-      link_files $source $dest
+      link_files "$source" "$dest"
     fi
 
   done
