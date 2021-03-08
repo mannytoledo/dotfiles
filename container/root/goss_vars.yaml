@@ -1,0 +1,5 @@
+symlinks:
+  - .gitconfig
+  - .tmux.conf
+  - .config
+  - .zsh

@@ -1,0 +1,11 @@
+file:
+  /clean.sh:
+    exists: true
+    filetype: symlink
+{{ $userhome := getEnv "HOME" "." }}
+{{- range .Vars.symlinks }}
+  {{ $userhome }}/{{.}}:
+    exists: true
+    filetype: symlink
+{{end}}
+
