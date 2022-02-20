@@ -41,3 +41,13 @@ awslistinstances() {
     --query 'Reservations[*].Instances[*].{Instance:InstanceId,AZ:Placement.AvailabilityZone,Name:Tags[?Key==`Name`]|[0].Value}' \
     --output text
   }
+
+awslistcodebuildprojects() {
+  aws --region us-west-2 codebuild list-projects --query "projects[?!starts_with(@, \`Ethos-SRE-Test\`)]"
+}
+
+klamsh() {
+  klam login
+  $(klam credentials --profile "${1}" -o bash)
+}
+

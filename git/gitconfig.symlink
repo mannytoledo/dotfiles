@@ -8,7 +8,8 @@
 [push]
   default = simple
 [alias]
-  new = "!sh -c 'git fetch upstream && git checkout -b feature/$1 upstream/master' -"
+  newmaster = "!sh -c 'git fetch upstream && git checkout -b feature/$1 upstream/master' -"
+  newmain = "!sh -c 'git fetch upstream && git checkout -b feature/$1 upstream/main' -"
   fix = "!sh -c 'git fetch upstream && git checkout -b fix/$1 upstream/master' -"
   update= "!sh -c 'git fetch upstream && git checkout -b update/$1 upstream/master' -"
   updatesolo = "!sh -c 'git fetch && git checkout -b update/$1 master' -"
@@ -43,3 +44,5 @@
 	pager = false
 [hub]
 	host = git.corp.adobe.com
+[init]
+	defaultBranch = main
