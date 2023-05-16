@@ -3,14 +3,14 @@
   name = Manny Toledo
 [core]
 	excludesfile = ~/.gitignore_global
-	pager = tig
 [merge]
 [push]
   default = simple
 [alias]
   newmaster = "!sh -c 'git fetch upstream && git checkout -b feature/$1 upstream/master' -"
   newmain = "!sh -c 'git fetch upstream && git checkout -b feature/$1 upstream/main' -"
-  fix = "!sh -c 'git fetch upstream && git checkout -b fix/$1 upstream/master' -"
+  fixmaster = "!sh -c 'git fetch upstream && git checkout -b fix/$1 upstream/master' -"
+  fixmain = "!sh -c 'git fetch upstream && git checkout -b fix/$1 upstream/main' -"
   update= "!sh -c 'git fetch upstream && git checkout -b update/$1 upstream/master' -"
   updatesolo = "!sh -c 'git fetch && git checkout -b update/$1 master' -"
   newsolo = "!sh -c 'git fetch && git checkout -b feature/$1 master' -"
@@ -46,3 +46,7 @@
 	host = git.corp.adobe.com
 [init]
 	defaultBranch = main
+[url "ssh://git@git.corp.adobe.com/"]
+	insteadOf = https://git.corp.adobe.com/
+[diff]
+	external = difft
